@@ -24,4 +24,15 @@ df_plot= df_plot[df_plot['Sex']==selected_gender]
 
 plot= px.histogram(df_plot, x='Age', color='Survived', template='seaborn', title='Survival by Age', facet_col='Survived')
 
-st.plotly_chart(plot)
+col1.plotly_chart(plot)
+
+
+#add a pie chart
+df_plot_pie= df_plot.loc[:, ['Survived', 'PassengerId']].groupby('Survived').count().reset_index()
+df_plot_pie.rename({'PassengerId': 'Count'}, inplace=True, axis='columns')
+
+
+#pie chart for survival or not survival of passengers
+pie_plot= px.pie(df_plot_pie, names='Survived', values='Count', title='Survival Distribution')
+
+col2.plotly_chart(pie_plot)
