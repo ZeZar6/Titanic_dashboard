@@ -36,3 +36,10 @@ df_plot_pie.rename({'PassengerId': 'Count'}, inplace=True, axis='columns')
 pie_plot= px.pie(df_plot_pie, names='Survived', values='Count', title='Survival Distribution')
 
 col2.plotly_chart(pie_plot)
+
+
+#add box plot
+box_plot= px.box(df_plot, x='Survived', y='Fare', color='Survived', template='seaborn', title='Fare Distribution by Class and Survival', facet_col='Survived')
+
+st.plotly_chart(box_plot)
+
