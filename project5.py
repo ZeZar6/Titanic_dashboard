@@ -6,7 +6,7 @@ import streamlit as st
 
 st.set_page_config(
     layout='wide',)
-df= pd.read_csv("Streamlit/share-of-individuals-using-the-internet.csv")
+df= pd.read_csv("share-of-individuals-using-the-internet.csv")
 df= df[(df['Year'] >=2000) & (df['Year'] <= 2016)]
 print(df.columns)
 print(df.info())
