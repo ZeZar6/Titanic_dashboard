@@ -36,3 +36,23 @@ with col1:
 
 with col2:
     st.plotly_chart(plot2)
+
+
+#add a sidebar
+st.sidebar.subheader('Country level detail')
+
+
+#add a form
+form= st.sidebar.form('form')
+selected_country=form.selectbox(label='Select Country', options=country, index=0)
+submit=form.form_submit_button('Submit')
+
+
+st.subheader('Country level detail for {}'.format(selected_country))
+
+if submit:
+    df_by_country=df[df['Country'] == selected_country]
+    plot= px.line(data_frame=df_by_country, x='Year', y='Individuals using the Internet (% of population)', title='Internet Usage Over Time for {}'.format(selected_country))
+    st.plotly_chart(plot)
+
+
