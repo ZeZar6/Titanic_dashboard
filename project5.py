@@ -12,6 +12,7 @@ print(df.columns)
 print(df.info())
 
 
+
 years= df['Year'].unique()
 years.sort()
 country = df['Country'].unique(
@@ -20,9 +21,18 @@ selected_year= st.selectbox(label='Year', options=years)
 
 selected_country= st.selectbox(label='Country', options=country)
 
+df_plot= df[df['Year'] == selected_year]
 
 st.header('Internet Usage DashBoard')
+col1, col2= st.columns([1,1])
 
-plot= px.choropleth(data_frame= df[df['Year'] == selected_year], locations='Country', locationmode='country names', color='Individuals using the Internet (% of population)', hover_name='Country', animation_frame='Year', title='Visual showing internet usage percentage across countries', color_continuous_scale=px.colors.qualitative.Vivid)
+plot= px.choropleth(data_frame=df_plot, locations='Country', locationmode='country names', color='Individuals using the Internet (% of population)', hover_name='Country',  title='Visual showing internet usage percentage across countries', color_continuous_scale=px.colors.qualitative.Vivid)
 
-st.plotly_chart(plot)
+plot2= px.histogram(data_frame=df_plot, x='Individuals using the Internet (% of population)', title='Histogram showing internet usage percentage across countries', color='Country',)
+
+
+with col1:
+    st.plotly_chart(plot)
+
+with col2:
+    st.plotly_chart(plot2)
